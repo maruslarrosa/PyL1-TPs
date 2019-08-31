@@ -13,9 +13,12 @@
 #include <ctype.h>
 #include "operations.h"
 
+<<<<<<< HEAD
 #define SUCCESS 0
 #define ERROR -1
 
+=======
+>>>>>>> 4d316008ccdcc0371a20aeb5b756835547f38a9a
 int getNumber( int *number1, int *number2);
 int showMenu(int number1, int number2, char *operator);
 void runOperation(int number1, int number2, char operator);
@@ -41,6 +44,7 @@ int main(void) {
 }
 
 int getNumber( int *number1, int *number2){
+<<<<<<< HEAD
 	int status = -1;
 	int _number1, _number2;
 	printf("Por favor, ingrese el primer operando: ");
@@ -57,13 +61,24 @@ int getNumber( int *number1, int *number2){
 		number1 = &_number1;
 		number2 = &_number2;
 		status = 0;
+=======
+	printf("Por favor, ingrese el primer operando: ");
+	scanf("%d", number1);
+	printf("Por favor, ingrese el segundo operando: ");
+	scanf("%d", number2);
+	if(number1 && number2){
+		return 0;
+>>>>>>> 4d316008ccdcc0371a20aeb5b756835547f38a9a
 	}
 	return status;
 }
 
 int showMenu(int number1, int number2, char *operator){
+<<<<<<< HEAD
 	int status = -1;
 	char _operator;
+=======
+>>>>>>> 4d316008ccdcc0371a20aeb5b756835547f38a9a
 	printf("Los números seleccionados son: %d y %d \n", number1, number2);
 	printf("Ingrese un operador (+ - * / !) o S para salir: \n");
 	__fpurge(stdin);
