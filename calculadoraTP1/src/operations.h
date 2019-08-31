@@ -1,10 +1,10 @@
 
-int sumNumbers(float number1, float number2, float *result);
+int sumNumbers(int number1, int number2, int *result);
 
-int restNumbers(float number1, float number2, float *result);
+int restNumbers(int number1, int number2, int *result);
 
-int divideNumbers(float number1, float number2, float *result);
+int divideNumbers(int number1, int number2, float *result);
 
-int multiplyNumbers(float number1, float number2, float *result);
+int multiplyNumbers(int number1, int number2, int *result);
 
-int numberFactorial(float number1, float *result);
+int numberFactorial(int number1, int *result);
