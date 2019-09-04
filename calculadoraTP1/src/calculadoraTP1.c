@@ -93,30 +93,25 @@ int validOperator(char operator){
 }
 
 void runOperation(int number1, int number2, char operator){
-	int intResult;
-	float floatResult;
 	switch(operator){
 	case('+'):
 		sumNumbers(number1, number2);
-//		printf("El resultado de %d + %d es: %d \n",number1, number2, intResult);
 		break;
 	case('-'):
-		restNumbers(number1, number2, &intResult);
-		printf("El resultado de %d - %d es: %d \n",number1, number2, intResult);
+		restNumbers(number1, number2);
 		break;
 	case('*'):
-		multiplyNumbers(number1, number2, &intResult);
-		printf("El resultado de %d * %d es: %d \n",number1, number2, intResult);
+		multiplyNumbers(number1, number2);
 		break;
 	case('/'):
-		if (divideNumbers(number1, number2, &floatResult) == 0){
-			printf("El resultado de %d / %d es: %f \n",number1, number2, floatResult);
+		if (number2 != 0){
+			divideNumbers(number1, number2);
 		} else {
 			printf("No es posible dividir por cero.\n");
 		}
 		break;
 	case('!'):
-		sumNumbers(number1, number2);
+		numberFactorial(number1);
 		break;
 	default:
 		break;
