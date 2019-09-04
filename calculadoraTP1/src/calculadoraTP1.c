@@ -104,11 +104,7 @@ void runOperation(int number1, int number2, char operator){
 		multiplyNumbers(number1, number2);
 		break;
 	case('/'):
-		if (number2 != 0){
-			divideNumbers(number1, number2);
-		} else {
-			printf("No es posible dividir por cero.\n");
-		}
+		divideNumbers(number1, number2);
 		break;
 	case('!'):
 		numberFactorial(number1);

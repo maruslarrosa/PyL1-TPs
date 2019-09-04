@@ -29,6 +29,8 @@ int divideNumbers(int number1, int number2){
 		result = number1 / number2;
 		printf("El resultado de %d + %d es: %f \n",number1, number2, result);
 		return 0;
+	} else {
+		printf("No es posible dividir por cero.\n");
 	}
 	return -1;
 }
@@ -44,14 +46,13 @@ int multiplyNumbers(int number1, int number2){
 }
 
 int numberFactorial(int number){
-	int result;
 	if(number){
 		int i;
-		int factorial;
+		int factorial = 1;
 		for(i = 1; i <= number; i++){
 			factorial *= i;
 		}
-		printf("El resultado de !%d es: %d \n", number, result);
+		printf("El resultado de !%d es: %d \n", number, factorial);
 		return 0;
 	}
 	return -1;
