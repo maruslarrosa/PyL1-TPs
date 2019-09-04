@@ -3,10 +3,12 @@
 #include "operations.h"
 
 
-int sumNumbers(int number1, int number2, int *result){
+int sumNumbers(int number1, int number2){
+	int result;
 	if(number1 && number2){
 		//Averiguar que es desreferenciar una variable
-		*result = number1 + number2;
+		result = number1 + number2;
+		printf("El resultado de %d + %d es: %d \n",number1, number2, result);
 		return 0;
 	}
 	return -1;

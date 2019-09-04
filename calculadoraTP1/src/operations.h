@@ -1,5 +1,5 @@
 
-int sumNumbers(int number1, int number2, int *result);
+int sumNumbers(int number1, int number2);
 
 int restNumbers(int number1, int number2, int *result);
 

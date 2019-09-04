@@ -13,14 +13,12 @@
 #include <ctype.h>
 #include "operations.h"
 
-<<<<<<< HEAD
 #define SUCCESS 0
 #define ERROR -1
 
-=======
->>>>>>> 4d316008ccdcc0371a20aeb5b756835547f38a9a
 int getNumber( int *number1, int *number2);
 int showMenu(int number1, int number2, char *operator);
+int validOperator(char operator);
 void runOperation(int number1, int number2, char operator);
 
 
@@ -44,9 +42,9 @@ int main(void) {
 }
 
 int getNumber( int *number1, int *number2){
-<<<<<<< HEAD
 	int status = -1;
 	int _number1, _number2;
+
 	printf("Por favor, ingrese el primer operando: ");
 	while (scanf("%d", &_number1) != 1){
 		__fpurge(stdin);
@@ -55,39 +53,43 @@ int getNumber( int *number1, int *number2){
 	printf("Por favor, ingrese el segundo operando: ");
 	while (scanf("%d", &_number2) != 1){
 		__fpurge(stdin);
-		printf("Valor Incorrecto.\nPor favor, ingrese el primer operando: ");
+		printf("Valor Incorrecto.\nPor favor, ingrese el segundo operando: ");
 	}
+
 	if(_number1 && _number2){
-		number1 = &_number1;
-		number2 = &_number2;
+		*number1 = _number1;
+		*number2 = _number2;
 		status = 0;
-=======
-	printf("Por favor, ingrese el primer operando: ");
-	scanf("%d", number1);
-	printf("Por favor, ingrese el segundo operando: ");
-	scanf("%d", number2);
-	if(number1 && number2){
-		return 0;
->>>>>>> 4d316008ccdcc0371a20aeb5b756835547f38a9a
 	}
 	return status;
 }
 
 int showMenu(int number1, int number2, char *operator){
-<<<<<<< HEAD
 	int status = -1;
 	char _operator;
-=======
->>>>>>> 4d316008ccdcc0371a20aeb5b756835547f38a9a
 	printf("Los números seleccionados son: %d y %d \n", number1, number2);
 	printf("Ingrese un operador (+ - * / !) o S para salir: \n");
 	__fpurge(stdin);
 	scanf("%c", &_operator);
+	while (validOperator(_operator) != 0){
+		__fpurge(stdin);
+		printf("Valor Incorrecto.\nPor favor, ingrese un operador (+ - * / !) o S para salir: \n ");
+		scanf("%c", &_operator);
+	}
+	__fpurge(stdin);
 	if(_operator) {
-		operator = &_operator;
+		*operator = _operator;
 		status = 0;
 	}
 	return status;
+}
+
+int validOperator(char operator){
+	int returnValue = -1;
+	if(operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '!'){
+		returnValue = 0;
+	}
+	return returnValue;
 }
 
 void runOperation(int number1, int number2, char operator){
@@ -95,8 +97,8 @@ void runOperation(int number1, int number2, char operator){
 	float floatResult;
 	switch(operator){
 	case('+'):
-		sumNumbers(number1, number2, &intResult);
-		printf("El resultado de %d + %d es: %d \n",number1, number2, intResult);
+		sumNumbers(number1, number2);
+//		printf("El resultado de %d + %d es: %d \n",number1, number2, intResult);
 		break;
 	case('-'):
 		restNumbers(number1, number2, &intResult);
@@ -114,7 +116,7 @@ void runOperation(int number1, int number2, char operator){
 		}
 		break;
 	case('!'):
-		sumNumbers(number1, number2, &intResult);
+		sumNumbers(number1, number2);
 		break;
 	default:
 		break;
