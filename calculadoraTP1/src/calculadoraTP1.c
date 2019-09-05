@@ -8,6 +8,7 @@
  ============================================================================
  */
 
+#include <stdio.h>
 #include <stdio_ext.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -19,7 +20,7 @@
 int getNumber( int *number1, int *number2);
 int showMenu(int number1, int number2, char *operator);
 int validOperator(char operator);
-void runOperation(int number1, int number2, char operator);
+int runOperation(int number1, int number2, char operator);
 
 
 int main(void) {
@@ -30,15 +31,18 @@ int main(void) {
 	if (getNumber(&number1, &number2) == SUCCESS){
 		while (operator != 'S') {
 			if (showMenu(number1, number2, &operator) == SUCCESS){
-				runOperation(number1, number2, operator);
+				if(operator != 'S' && runOperation(number1, number2, operator) == ERROR){
+					printf("Ocurrió un error al realizar la operación.\n");
+				}
 			} else {
-				printf("Ocurrió un error al realizar la operación.\n");
+				printf("Ocurrió un error al solicitar la operación.\n");
 			}
 		}
 	} else {
 		printf("Ocurrió un error al solicitar los números.\n");
 	}
 	printf("Adiós");
+	return 0;
 }
 
 int getNumber( int *number1, int *number2){
@@ -56,7 +60,8 @@ int getNumber( int *number1, int *number2){
 		printf("Valor Incorrecto.\nPor favor, ingrese el segundo operando: ");
 	}
 
-	if(_number1 && _number2){
+	int validNumbers = (_number1*2/2) == _number1 && (_number2*2/2) == _number2;
+	if(validNumbers){
 		*number1 = _number1;
 		*number2 = _number2;
 		status = 0;
@@ -68,12 +73,18 @@ int showMenu(int number1, int number2, char *operator){
 	int status = -1;
 	char _operator;
 	printf("Los números seleccionados son: %d y %d \n", number1, number2);
-	printf("Ingrese un operador (+ - * / !) o S para salir: \n");
+	printf("Ingrese la operación que desea realizar, o S para salir: \n");
+	printf("a) Calcular la suma (%d + %d)\n", number1, number2);
+	printf("b) Calcular la resta (%d - %d)\n", number1, number2);
+	printf("c) Calcular la division (%d / %d)\n", number1, number2);
+	printf("d) Calcular la multiplicacion (%d * %d)\n", number1, number2);
+	printf("e) Calcular el factorial (!%d y !%d)\n", number1, number2);
 	__fpurge(stdin);
 	scanf("%c", &_operator);
 	while (validOperator(_operator) != 0){
 		__fpurge(stdin);
-		printf("Valor Incorrecto.\nPor favor, ingrese un operador (+ - * / !) o S para salir: \n ");
+		printf("Valor Incorrecto.\n"
+				"Por favor, ingrese la operación que desea realizar o S para salir: \n ");
 		scanf("%c", &_operator);
 	}
 	__fpurge(stdin);
@@ -86,30 +97,48 @@ int showMenu(int number1, int number2, char *operator){
 
 int validOperator(char operator){
 	int returnValue = -1;
-	if(operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '!'){
+	if(operator == 'a'
+		|| operator == 'b'
+		|| operator == 'c'
+		|| operator == 'd'
+		|| operator == 'e'
+		|| operator == 'S')
+	{
 		returnValue = 0;
 	}
 	return returnValue;
 }
 
-void runOperation(int number1, int number2, char operator){
+int runOperation(int number1, int number2, char operator){
+	int returnValue = -1;
 	switch(operator){
-	case('+'):
-		sumNumbers(number1, number2);
+	case('a'):
+		if(sumNumbers(number1, number2) == 0){
+			returnValue = 0;
+		}
 		break;
-	case('-'):
-		restNumbers(number1, number2);
+	case('b'):
+		if(restNumbers(number1, number2) == 0){
+			returnValue = 0;
+		}
 		break;
-	case('*'):
-		multiplyNumbers(number1, number2);
+	case('c'):
+		if(divideNumbers(number1, number2) == 0){
+			returnValue = 0;
+		}
 		break;
-	case('/'):
-		divideNumbers(number1, number2);
+	case('d'):
+		if(multiplyNumbers(number1, number2) == 0){
+			returnValue = 0;
+		}
 		break;
-	case('!'):
-		numberFactorial(number1);
+	case('e'):
+		if(numberFactorial(number1) == 0 && numberFactorial(number2) == 0){
+			returnValue = 0;
+		}
 		break;
 	default:
 		break;
 	}
+	return returnValue;
 }
